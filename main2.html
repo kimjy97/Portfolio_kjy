@@ -49,6 +49,7 @@
                 border-color: rgba(255, 255, 255, 0.3);
                 border-style: solid;
                 text-align: center;
+                opacity: 1;
             }
 
             .EnterPOP .ct {
@@ -115,6 +116,7 @@
                 height: 40px;
                 justify-content: center;
                 align-items: center;
+                opacity: 1;
             }
 
             .EnterPOP .ct .ctt p {
@@ -237,7 +239,60 @@
             }
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        
         <script>
+
+            $(document).ready(function () {
+                /* 1 */
+                var headervisible = false;
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() >= 150) {
+                        if (headervisible == false) {
+                            $(".EnterPOP").animate({
+                                height: '50px',
+                            }, 
+                                200, 'easeOutQuad'
+                            );
+                            $(".bottom").animate({opacity:'0'},200, function(){
+                                $(".bottom").hide();
+                            });
+                            $("#profilecontent").hide();
+                            $(".ctt").css(
+                                {display:'bolck', position:'absolute'}
+                            );
+                            $("#profileimg").css(
+                                {position:'fixed', top:'0', marginTop:'7px', opacity:'0', left:'30%'}
+                            );
+                            $(".head").hide();
+                            $("#profileimg").animate({width:'25px', height:'25px', left:'20px', padding:'8px', borderRadius:'10px', opacity:'1'},200,'easeOutQuad');
+                            $(".EnterPOP").css({'position': 'fixed', 'top': '0', backgroundColor:'rgba(255, 255, 255, 0.4)'});
+                            headervisible = true;
+                        }
+                    } else {
+                        if (headervisible == true) {
+                            $(".EnterPOP").animate({height:'200px'}, 300, function() {
+                                $(".EnterPOP").css({height:'fit-content'});
+                            });
+                            $(".bottom").show();
+                            $(".bottom").animate({opacity:'1'},200);
+                            $("#profilecontent").show();
+                            $(".ctt").css(
+                                {display:'flex', position:'relative'}
+                            );
+                            $("#profileimg").css(
+                                {position:'relative', marginTop:'15px', padding:'20px', left:'0', top:'0',float:'left'}
+                            );
+                            $("#profileimg").animate({width:'60px', height:'60px', borderRadius:'15px'},200);
+                            $(".head").show();
+                            $(".EnterPOP").css(
+                                {'position': 'absolute', 'top': '25%', 'height': 'fit-content',backgroundColor:'rgba(255, 255, 255, 0.05)'}
+                            );
+                            headervisible = false;
+                        }
+                    }
+                });
+            });
         </script>
 
     </head>
@@ -248,8 +303,8 @@
                     <div class="head">
                         <div class="headtext">PORTFOLIO</div>
                     </div>
-                    <div class="ctt"><img class="img" src="./man.png">
-                        <div style="margin: 20px 0 15px 15px">
+                    <div class="ctt"><img class="img" id="profileimg" src="./man.png">
+                        <div id="profilecontent" style="margin: 20px 0 15px 15px">
                             <p style="font-weight: 900; font-size: 15px;">Front-end Developer</p>
                             <p style="margin-top: 0px; font-weight: 300; font-size: 18px;">JongYeon Kim | 김종연</p>
                             <p style="font-size: 12px; font-weight: 300; margin-top: 8px;">010-2744-9658</p>
