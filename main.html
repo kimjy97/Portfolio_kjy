@@ -243,10 +243,10 @@
                 var boxcount = $(elm).length;
                 var wheelflag = false; //휠 동작중인지 아닌지 체크
                 var wheelindex = 0; //첫번째 전체화면 엘리먼트 인덱스값
-
                 $(elm).each(function (index) {
                     // 개별적으로 Wheel 이벤트 적용
                     $(this).on("mousewheel DOMMouseScroll", function (e) {
+                        alert('스크롤됨');
                         e.preventDefault();
                         console.log($(this).index());
                         var delta = 0;
