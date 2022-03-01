@@ -272,7 +272,7 @@
                     } else {
                         if (headervisible == true) {
                             $(".EnterPOP").animate({height:'200px'}, 300, function() {
-    
+                                $(".EnterPOP").css({height:'auto'});
                             });
                             $(".bottom").show();
                             $(".bottom").animate({opacity:'1'},200);
@@ -286,7 +286,7 @@
                             $("#profileimg").animate({width:'60px', height:'60px', borderRadius:'15px'},200);
                             $(".head").show();
                             $(".EnterPOP").css(
-                                {'position': 'absolute', 'top': '25%', 'height': 'fit-content',backgroundColor:'rgba(255, 255, 255, 0.05)'}
+                                {'position': 'absolute', 'top': '25%', height: 'auto', backgroundColor:'rgba(255, 255, 255, 0.05)'}
                             );
                             headervisible = false;
                         }
