@@ -13,6 +13,7 @@
         <link
             href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap"
             rel="stylesheet">
+
         <style>
 
             * {
@@ -25,8 +26,12 @@
             html {
                 width: 100%;
                 height: 100%;
+                
             }
             #bodyimg {
+                position: fixed;
+                top: 0;
+                left: 0;
                 width: 100%;
                 height: 100%;
                 background: url("./background.jpg") no-repeat;
@@ -50,6 +55,25 @@
                 border-style: solid;
                 text-align: center;
                 opacity: 1;
+            }
+
+            .EnterPOP .name {
+                position: absolute;
+                font-size: 15px;
+                font-weight: 500;
+                right: 30px;
+                top: -20%;
+                opacity: 0;
+            }
+
+            .EnterPOP .line {
+                position: absolute;
+                width: 1.5px;
+                height: 35px;
+                margin: 10px;
+                background-color: rgba(0, 0, 0, 0.1);
+                right: 187px;
+                opacity: 0;
             }
 
             .EnterPOP .ct {
@@ -91,8 +115,11 @@
                 backdrop-filter: blur(10px);
                 padding: 20px;
                 border-radius: 15px;
-                border-width: 1px 0 0 0;
-                border-color: rgba(141, 141, 141, 0.719);
+                border-width: 1px 1px 1px 1px;
+                border-top-color: rgba(141, 141, 141, 0.719);
+                border-left-color: rgba(210, 210, 210, 0.719);
+                border-right-color: rgba(210, 210, 210, 0.719);
+                border-bottom-color: rgba(219, 219, 219, 0.719);
                 border-style: solid;
                 margin-top: 15px;
                 float: left;
@@ -153,6 +180,7 @@
             }
             .scroll_down_text {
                 position: absolute;
+                width:100%;
                 left: 50%;
                 bottom: 0.5%;
                 text-align: center;
@@ -164,7 +192,7 @@
                 backdrop-filter: blur(10px);
                 background: linear-gradient(180deg, rgba(194, 194, 194, 0.8) 0%, rgba(224, 224, 224, 0.37) 20%, rgba(220, 220, 255, 0) 100%);*/
                 transform: translate(-50%, 0);
-                padding: 5px 50px;
+                padding: 5px 0;
                 border-radius: 9px 9px 0 0;
             }
 
@@ -237,57 +265,116 @@
                 justify-content: center;
                 align-items: center;
             }
+
+            #container {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                scroll-behavior: smooth;
+            }
+
+            #ct1 {
+                width: 100%;
+                height: 100%;
+            }
+
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
         <script>
 
             $(document).ready(function () {
-                /* 1 */
                 var headervisible = false;
-                $(window).scroll(function () {
+                /*$(window).scroll(function () {
+                    var scroll = $(this).scrollTop();
+                    var num = 2;
+                    $("#ct2").stop().animate({"top":-scroll/6},0.1);
+                    console.trace($("#ct"+num).offset().top);*/
                     if ($(this).scrollTop() >= 150) {
                         if (headervisible == false) {
+                            headervisible = true;
+                            $("#profileimg").stop(true, true);
+                            $(".bottom").stop(true, true);
+                            $(".EnterPOP").stop(true, true);
+
                             $(".EnterPOP").animate({
-                                height: '50px',
-                            }, 
-                                200, 'easeOutQuad'
-                            );
-                            $(".bottom").animate({opacity:'0'},200, function(){
+                                height: '50px'
+                            }, 200, 'easeOutQuad');
+                            $(".bottom").animate({
+                                opacity: '0'
+                            }, 200, function () {
                                 $(".bottom").hide();
                             });
                             $("#profilecontent").hide();
-                            $(".ctt").css(
-                                {display:'bolck', position:'absolute'}
-                            );
-                            $("#profileimg").css(
-                                {position:'fixed', top:'0', marginTop:'7px', opacity:'0', left:'30%'}
-                            );
+                            $(".ctt").css({display: 'bolck', position: 'absolute'});
+                            $("#profileimg").css({
+                                position: 'fixed',
+                                top: '-20%',
+                                marginTop: '10px',
+                                opacity: '0',
+                                right: '140px',
+                                width: '20px',
+                                height: '20px',
+                                padding: '7px'
+                            });
                             $(".head").hide();
-                            $("#profileimg").animate({width:'25px', height:'25px', left:'20px', padding:'8px', borderRadius:'10px', opacity:'1'},200,'easeOutQuad');
-                            $(".EnterPOP").css({'position': 'fixed', 'top': '0', backgroundColor:'rgba(255, 255, 255, 0.4)'});
-                            headervisible = true;
+                            $("#profileimg").animate({
+                                width: '20px',
+                                height: '20px',
+                                top: '0',
+                                right: '140px',
+                                padding: '7px',
+                                borderRadius: '10px',
+                                opacity: '1'
+                            }, 200, 'easeOutQuad');
+                            $(".EnterPOP").css(
+                                {position: 'fixed', top: '0', backgroundColor: 'rgba(255, 255, 255, 0.4)'}
+                            );
+                            $(".line").animate({
+                                opacity: '1'
+                            }, 500, 'easeOutQuad');
+                            $(".name").animate({
+                                top: '20px',
+                                opacity: '1'
+                            }, 400, 'easeOutQuad');
                         }
                     } else {
                         if (headervisible == true) {
-                            $(".EnterPOP").animate({height:'200px'}, 300, function() {
-                                $(".EnterPOP").css({height:'auto'});
+                            $("#profileimg").stop(true, true);
+                            $(".bottom").stop(true, true);
+                            $(".EnterPOP").stop(true, true);
+                            $(".line").stop(true, true);
+                            $(".name").stop(true, true);
+
+                            $(".line").css({opacity: '0'});
+                            $(".name").css({opacity: '0', top: '-20%'});
+
+                            $(".EnterPOP").animate({
+                                height: '200px'
+                            }, 300, function () {
+                                $(".EnterPOP").css({height: 'auto'});
                             });
                             $(".bottom").show();
-                            $(".bottom").animate({opacity:'1'},200);
+                            $(".bottom").animate({
+                                opacity: '1'
+                            }, 200);
                             $("#profilecontent").show();
-                            $(".ctt").css(
-                                {display:'flex', position:'relative'}
-                            );
+                            $(".ctt").css({display: 'flex', position: 'relative'});
                             $("#profileimg").css(
-                                {position:'relative', marginTop:'15px', padding:'20px', left:'0', top:'0',float:'left'}
+                                {position: 'relative', marginTop: '15px', padding: '20px', right: '0px', float: 'left'}
                             );
-                            $("#profileimg").animate({width:'60px', height:'60px', borderRadius:'15px'},200);
                             $(".head").show();
                             $(".EnterPOP").css(
-                                {'position': 'absolute', 'top': '25%', height: 'auto', backgroundColor:'rgba(255, 255, 255, 0.05)'}
+                                {'position': 'absolute', 'top': '25%', height: 'auto', backgroundColor: 'rgba(255, 255, 255, 0.05)'}
                             );
+                            $("#profileimg").animate({
+                                width: '60px',
+                                height: '60px',
+                                borderRadius: '15px'
+                            }, 200, 'easeOutQuad', function () {});
+
                             headervisible = false;
                         }
                     }
@@ -297,38 +384,44 @@
 
     </head>
     <body>
-        <div class="box">
-            <div class="EnterPOP">
-                <div class="ct">
-                    <div class="head">
-                        <div class="headtext">PORTFOLIO</div>
-                    </div>
-                    <div class="ctt"><img class="img" id="profileimg" src="./man.png">
-                        <div id="profilecontent" style="margin: 20px 0 15px 15px">
-                            <p style="font-weight: 900; font-size: 15px;">Front-end Developer</p>
-                            <p style="margin-top: 0px; font-weight: 300; font-size: 18px;">JongYeon Kim | 김종연</p>
-                            <p style="font-size: 12px; font-weight: 300; margin-top: 8px;">010-2744-9658</p>
-                            <p style="font-size: 12px; font-weight: 300;">poot972@gmail.com</p>
+        <div id="container">
+            <div class="box" id="ct1">
+                <div id="bodyimg"></div>
+                <div class="EnterPOP">
+                    <div class="line"></div>
+                    <p class="name">JongYeon Kim</p>
+                    <div class="ct">
+                        <div class="head">
+                            <div class="headtext">PORTFOLIO</div>
+                        </div>
+                        <div class="ctt"><img class="img" id="profileimg" src="./man.png">
+                            <div id="profilecontent" style="margin: 20px 0 15px 15px">
+                                <p style="font-weight: 900; font-size: 15px;">Front-end Developer</p>
+                                <p style="margin-top: 0px; font-weight: 300; font-size: 18px;">JongYeon Kim | 김종연</p>
+                                <p style="font-size: 12px; font-weight: 300; margin-top: 8px;">010-2744-9658</p>
+                                <p style="font-size: 12px; font-weight: 300;">poot972@gmail.com</p>
+                            </div>
                         </div>
                     </div>
+                    <div class="bottom"><img src="./tag.png">
+                        <div class="myText">#프론트엔드_개발자</div>
+                        <div class="myText">#느낌있는</div>
+                        <div class="myText">#열정적인</div>
+                        <div class="myText">#신입</div>
+                    </div>
                 </div>
-                <div class="bottom"><img src="./tag.png">
-                    <div class="myText">#프론트엔드_개발자</div>
-                    <div class="myText">#느낌있는</div>
-                    <div class="myText">#열정적인</div>
-                    <div class="myText">#신입</div>
-                </div>
+
+                <div class="scroll_down"></div>
+                <div class="scroll_down_text">SCORLL DOWN</div>
             </div>
-            <div id="bodyimg"></div>
-            <div class="scroll_down"></div>
-            <div class="scroll_down_text">SCORLL DOWN</div>
+
+            <div class="box" id="ct2" style="background-color:rgb(255,255,255);">2</div>
+            <div class="box" style="background-color:orange;">3</div>
+            <div class="box" style="background-color:yellow;">4</div>
+            <div class="box" style="background-color:green;">5</div>
+            <div class="box" style="background-color:blue;">6</div>
+            <div class="box" style="background-color:indigo;">7</div>
+            <div class="box" style="background-color:violet;">8</div>
         </div>
-        <div class="box" style="background-color:rgb(255,255,255);">2</div>
-        <div class="box" style="background-color:orange;">3</div>
-        <div class="box" style="background-color:yellow;">4</div>
-        <div class="box" style="background-color:green;">5</div>
-        <div class="box" style="background-color:blue;">6</div>
-        <div class="box" style="background-color:indigo;">7</div>
-        <div class="box" style="background-color:violet;">8</div>
     </body>
 </html>
