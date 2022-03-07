@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="yes" name="apple-mobile-web-app-capable" />
         <title>JongYeon's PORTFOLIO</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link
@@ -25,7 +26,7 @@
             body,
             html {
                 width: 100%;
-                height: 100%;
+                height: calc(100%);
                 overscroll-behavior: contain;
 
             }
@@ -288,9 +289,25 @@
                 opacity: 1;
                 margin-bottom: 0;
             }
-
             #ct2 {
-                opacity: 1;
+                width: 100%;
+                height: 100vh;
+            }
+            #ct3 {
+                width: 100%;
+                height: 100vh;
+            }
+            #ct3 {
+                width: 100%;
+                height: 100vh;
+            }
+            #ct4 {
+                width: 100%;
+                height: 100vh;
+            }
+            #ct5 {
+                width: 100%;
+                height: 100vh;
             }
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -332,7 +349,7 @@
                         .addTo(controller2);
                 }
 
-                for (var i = 2; i < slides.length; i++) {
+                for (var i = 1; i < slides.length; i++) {
                     tween[i] = TweenMax.to(slides[i], 0.5, {opacity: 1});
                     new ScrollMagic
                         .Scene(
