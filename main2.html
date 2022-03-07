@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="yes" name="apple-mobile-web-app-capable" />
+        <meta content="yes" name="apple-mobile-web-app-capable"/>
         <title>JongYeon's PORTFOLIO</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link
@@ -360,6 +360,12 @@
                         .addTo(controller);
                 }
 
+                var backgroundTween = TweenMax.to("#bodyimg", 0.1, {y: -150});
+                var backgroundScene = new ScrollMagic
+                    .Scene({triggerElement: "#ct1", triggerHook: "0", duration: "100%"})
+                    .setTween(backgroundTween)
+                    .addTo(controller);
+
                 var POPscene = new ScrollMagic
                     .Scene({
                         triggerElement: ".EnterPOP",
@@ -368,13 +374,12 @@
                     })
                     .setPin(".EnterPOP")
                     .addTo(controller)
-                  //.addIndicators({name: "pop"})
+                //.addIndicators({name: "pop"})
 
                 var POPscene2 = new ScrollMagic
-                    .Scene({
-                        triggerElement: "#ct2",
-                        triggerHook: .45
-                    })
+                    .Scene(
+                        {triggerElement: "#ct2", triggerHook: .45}
+                    )
                     .addTo(controller)
                     .on("enter leave", function (e) {
                         if (e.type == "enter") {
@@ -382,11 +387,11 @@
                             $("#profileimg").stop(true, false);
                             $(".bottom").stop(true, false);
                             $(".EnterPOP").stop(true, false);
-                            
+
                             $(".EnterPOP").animate({
                                 height: '50px'
                             }, 150, 'easeOutQuad', function () {
-                                $(".EnterPOP").css({backgroundColor:"rgba(255,255,255,0.4"})
+                                $(".EnterPOP").css({backgroundColor: "rgba(255,255,255,0.4"})
                             });
 
                             $(".bottom").animate({
